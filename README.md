@@ -77,7 +77,7 @@ Submit a booking request
 ```json
 {
   "fullName": "John Doe",
-  "phone": "647-710-7247",
+  "phone": "fivestardetailingto@gmail.com",
   "email": "john@example.com",
   "serviceAddress": "123 Main St, Toronto, ON",
   "vehicleMake": "Toyota",
