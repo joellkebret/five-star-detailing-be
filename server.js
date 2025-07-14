@@ -36,7 +36,7 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 10, // Limit each IP to 10 requests per windowMs
   message: {
-        success: false,
+    success: false,
     message: 'Too many requests from this IP, please try again later.'
   },
   standardHeaders: true,
@@ -55,10 +55,22 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
-app.use(express.static(join(__dirname, '../dist')));
 
 // Routes
 app.use('/api', bookingRoutes);
+
+// Root endpoint - API info
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Five Star Detailing API',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      booking: '/api/book'
+    },
+    status: 'running'
+  });
+});
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -67,11 +79,6 @@ app.get('/api/health', (req, res) => {
     message: 'Five Star Detailing API is running',
     timestamp: new Date().toISOString()
   });
-});
-
-// Serve React app for all other routes
-app.get('*', (req, res) => {
-  res.sendFile(join(__dirname, '../dist/index.html'));
 });
 
 // Error handling middleware
