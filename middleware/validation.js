@@ -36,7 +36,7 @@ export const validateBookingData = [
     .withMessage('Please provide a valid vehicle year'),
   
   body('vehicleType')
-    .isIn(['sedan', 'suv', 'truck', 'van', 'other'])
+    .isIn(['sedan', 'suv', 'truck', 'luxury', 'other'])
     .withMessage('Please select a valid vehicle type'),
   
   body('preferredDate')
@@ -54,11 +54,11 @@ export const validateBookingData = [
     .withMessage('Please select a valid time slot'),
   
   body('selectedPackage')
-    .isIn(['basic', 'premium', 'ultimate', 'interior-only', 'exterior-only'])
+    .isIn(['interior', 'exterior', 'full'])
     .withMessage('Please select a valid service package'),
   
   body('paymentMethod')
-    .isIn(['cash', 'card', 'venmo', 'paypal'])
+    .isIn(['cash', 'credit', 'debit', 'etransfer'])
     .withMessage('Please select a valid payment method'),
   
   body('specialInstructions')
