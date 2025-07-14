@@ -13,7 +13,8 @@ export const validateBookingData = [
     .withMessage('Please provide a valid email address'),
   
   body('phone')
-    .matches(/^[\+]?[1-9][\d]{0,15}$/)
+    .trim()
+    .isLength({ min: 10, max: 20 })
     .withMessage('Please provide a valid phone number'),
   
   body('serviceAddress')
@@ -36,8 +37,9 @@ export const validateBookingData = [
     .withMessage('Please provide a valid vehicle year'),
   
   body('vehicleType')
-    .isIn(['sedan', 'suv', 'truck', 'luxury', 'other'])
-    .withMessage('Please select a valid vehicle type'),
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage('Please select a vehicle type'),
   
   body('preferredDate')
     .isISO8601()
@@ -50,16 +52,19 @@ export const validateBookingData = [
     .withMessage('Preferred date must be today or in the future'),
   
   body('preferredTime')
-    .isIn(['morning', 'afternoon', 'evening'])
-    .withMessage('Please select a valid time slot'),
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage('Please select a time slot'),
   
   body('selectedPackage')
-    .isIn(['interior', 'exterior', 'full'])
-    .withMessage('Please select a valid service package'),
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage('Please select a service package'),
   
   body('paymentMethod')
-    .isIn(['cash', 'credit', 'debit', 'etransfer'])
-    .withMessage('Please select a valid payment method'),
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage('Please select a payment method'),
   
   body('specialInstructions')
     .optional()
@@ -71,6 +76,7 @@ export const validateBookingData = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log('Validation errors:', errors.array());
       return res.status(400).json({
         success: false,
         message: 'Validation failed',
