@@ -120,10 +120,11 @@ router.get('/test-components', async (req, res) => {
     // Test 3: Email transporter creation
     try {
       console.log('🔧 Testing email transporter creation...');
-      const { createTransporter } = await import('nodemailer');
-      const transporter = createTransporter({
+      const nodemailer = await import('nodemailer');
+      const transporter = nodemailer.default.createTransport({
         host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-        port: process.env.EMAIL_PORT || 587,     secure: false,
+        port: Number(process.env.EMAIL_PORT) || 587,
+        secure: (Number(process.env.EMAIL_PORT) || 587) === 465, // true for implicit TLS
         auth: {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASS,

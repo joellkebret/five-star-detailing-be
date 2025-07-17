@@ -4,10 +4,10 @@ import { generateEmailHTML } from './emailTemplates.js';
 
 // Email transporter configuration
 const createTransporter = () => {
-  return nodemailer.createTransporter({
+  return nodemailer.createTransport({
     host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-    port: process.env.EMAIL_PORT || 587,
-    secure: false,
+    port: Number(process.env.EMAIL_PORT) || 587,
+    secure: (Number(process.env.EMAIL_PORT) || 587) === 465, // true for implicit TLS
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -23,6 +23,9 @@ export const submitBooking = async (bookingData) => {
 
     // Create email transporter
     const transporter = createTransporter();
+    
+    // Verify transporter connection
+    await transporter.verify();
 
     // Set up email recipient (business email only)
     const businessEmail = process.env.EMAIL_TO || 'fivestardetailingto@gmail.com';
