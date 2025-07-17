@@ -121,7 +121,7 @@ router.get('/test-components', async (req, res) => {
     try {
       console.log('🔧 Testing email transporter creation...');
       const nodemailer = await import('nodemailer');
-      const transporter = nodemailer.createTransporter({
+      const transporter = nodemailer.default.createTransporter({
         host: process.env.EMAIL_HOST || 'smtp.gmail.com',
         port: process.env.EMAIL_PORT || 587,     secure: false,
         auth: {
