@@ -14,7 +14,7 @@ export const validateBookingData = [
   
   body('phone')
     .trim()
-    .isLength({ min: 10, max: 20 })
+    .isLength({ min: 5, max: 20 })
     .withMessage('Please provide a valid phone number'),
   
   body('serviceAddress')
