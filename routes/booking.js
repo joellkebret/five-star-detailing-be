@@ -120,8 +120,8 @@ router.get('/test-components', async (req, res) => {
     // Test 3: Email transporter creation
     try {
       console.log('🔧 Testing email transporter creation...');
-      const nodemailer = await import('nodemailer');
-      const transporter = nodemailer.default.createTransporter({
+      const { createTransporter } = await import('nodemailer');
+      const transporter = createTransporter({
         host: process.env.EMAIL_HOST || 'smtp.gmail.com',
         port: process.env.EMAIL_PORT || 587,     secure: false,
         auth: {
@@ -134,7 +134,7 @@ router.get('/test-components', async (req, res) => {
       console.log('✅ Email transporter test passed');
     } catch (error) {
       results.emailTransporter = `❌ Email transporter failed: ${error.message}`;
-      console.error('❌ Email transporter test failed:',error);
+      console.error('❌ Email transporter test failed:', error);
     }
 
     res.json({
