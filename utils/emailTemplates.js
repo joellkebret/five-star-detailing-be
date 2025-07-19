@@ -94,7 +94,9 @@ export const generateEmailHTML = (bookingData) => {
             }
             .info-item {
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
+                align-items: baseline;
+                margin-bottom: 6px;
             }
             .info-item.full-width {
                 grid-column: 1 / -1;
@@ -103,7 +105,7 @@ export const generateEmailHTML = (bookingData) => {
                 font-weight: 600;
                 color: #6b7280;
                 font-size: 14px;
-                margin-bottom: 5px;
+                margin-right: 6px;
             }
             .info-value {
                 color: #333;
@@ -150,16 +152,13 @@ export const generateEmailHTML = (bookingData) => {
                 <h2>👤 Customer Information</h2>
                 <div class="info-grid">
                     <div class="info-item">
-                        <div class="info-label">Full Name</div>
-                        <div class="info-value">${fullName}</div>
+                        <span class="info-label">Full Name:</span> <span class="info-value">${fullName}</span>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">Phone Number</div>
-                        <div class="info-value">${phone}</div>
+                        <span class="info-label">Phone Number:</span> <span class="info-value">${phone}</span>
                     </div>
                     <div class="info-item full-width">
-                        <div class="info-label">Email Address</div>
-                        <div class="info-value">${email}</div>
+                        <span class="info-label">Email Address:</span> <span class="info-value">${email}</span>
                     </div>
                 </div>
             </div>
@@ -168,20 +167,16 @@ export const generateEmailHTML = (bookingData) => {
                 <h2>🚙 Vehicle Information</h2>
                 <div class="info-grid">
                     <div class="info-item">
-                        <div class="info-label">Make</div>
-                        <div class="info-value">${vehicleMake}</div>
+                        <span class="info-label">Make:</span> <span class="info-value">${vehicleMake}</span>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">Model</div>
-                        <div class="info-value">${vehicleModel}</div>
+                        <span class="info-label">Model:</span> <span class="info-value">${vehicleModel}</span>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">Year</div>
-                        <div class="info-value">${vehicleYear}</div>
+                        <span class="info-label">Year:</span> <span class="info-value">${vehicleYear}</span>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">Type</div>
-                        <div class="info-value">${vehicleType}</div>
+                        <span class="info-label">Type:</span> <span class="info-value">${vehicleType}</span>
                     </div>
                 </div>
             </div>
@@ -190,20 +185,16 @@ export const generateEmailHTML = (bookingData) => {
                 <h2>📅 Appointment Details</h2>
                 <div class="info-grid">
                     <div class="info-item">
-                        <div class="info-label">Date</div>
-                        <div class="info-value">${formatDate(preferredDate)}</div>
+                        <span class="info-label">Date:</span> <span class="info-value">${formatDate(preferredDate)}</span>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">Time</div>
-                        <div class="info-value">${formatTime(preferredTime)}</div>
+                        <span class="info-label">Time:</span> <span class="info-value">${formatTime(preferredTime)}</span>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">Service Package</div>
-                        <div class="info-value">${selectedPackage}</div>
+                        <span class="info-label">Service Package:</span> <span class="info-value">${selectedPackage}</span>
                     </div>
                     <div class="info-item">
-                        <div class="info-label">Payment Method</div>
-                        <div class="info-value">${paymentMethod}</div>
+                        <span class="info-label">Payment Method:</span> <span class="info-value">${paymentMethod}</span>
                     </div>
                 </div>
             </div>
@@ -211,8 +202,7 @@ export const generateEmailHTML = (bookingData) => {
             <div class="section">
                 <h2>📍 Service Location</h2>
                 <div class="info-item">
-                    <div class="info-label">Address</div>
-                    <div class="info-value">${serviceAddress}</div>
+                    <span class="info-label">Address:</span> <span class="info-value">${serviceAddress}</span>
                 </div>
             </div>
 
@@ -220,7 +210,7 @@ export const generateEmailHTML = (bookingData) => {
             <div class="section">
                 <h2>📝 Special Instructions</h2>
                 <div class="info-item">
-                    <div class="info-value">${specialInstructions}</div>
+                    <span class="info-value">${specialInstructions}</span>
                 </div>
             </div>
             ` : ''}
